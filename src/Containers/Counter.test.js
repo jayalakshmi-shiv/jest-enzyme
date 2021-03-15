@@ -1,7 +1,7 @@
 import React from 'react'
 import Enzyme, { shallow } from 'enzyme'
 import EnzymeAdapter from '@wojtekmaj/enzyme-adapter-react-17'
-import App from './App';
+import Counter from './Counter';
 
 Enzyme.configure({adapter: new EnzymeAdapter()})
 
@@ -11,7 +11,7 @@ Enzyme.configure({adapter: new EnzymeAdapter()})
   * @param {object} props - Component props specific to this setup.
   * @returns {ShallowWrapper}
   */
-const setUp = () =>shallow(<App/>)
+const setUp = () =>shallow(<Counter/>)
 
 
 const findByValue = (wrapper, value) => wrapper.find(`[data-test='${value}']`);
