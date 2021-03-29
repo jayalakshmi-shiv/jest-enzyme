@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-const Jotto = (props) => {
+const Congrats = (props) => {
 
     if(props.success){
     return(
@@ -21,8 +21,8 @@ const Jotto = (props) => {
     }
 }
 
-Jotto.propTypes ={
+Congrats.propTypes ={
     success: PropTypes.bool.isRequired
 
 }
-export default Jotto; 
+export default Congrats; 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import Jotto from './Jotto';
+import Congrats from './Congrats';
 import {findByTestAttr, checkProps} from '../../test/testUtils';
 import checkPropsType from 'check-prop-types';
 
@@ -8,7 +8,7 @@ const defaultProps = {sucess:false};
 
 const setUp = (props={}) => {
     const setUpProps = {...defaultProps,...props}
-    return shallow(<Jotto {...setUpProps}/>)}
+    return shallow(<Congrats {...setUpProps}/>)}
 
 
 test('render without error',()=>{
@@ -23,7 +23,7 @@ test('render no text when `success` props is false',()=>{
     expect(component.text()).toBe('');
 })
 
-test('render non-empty congrats message when `success` prop is true',()=>{
+test('render non-empty  message when `success` prop is true',()=>{
     const wrapper = setUp({success:true});
     const component = findByTestAttr(wrapper,'component-message');
     expect(component.text().length).not.toBe(0)
@@ -32,6 +32,6 @@ test('render non-empty congrats message when `success` prop is true',()=>{
 
 test('does not throw warning with expected props',()=>{
     const expectedProps = {success:false};
-    checkProps(Jotto, expectedProps);
+    checkProps(Congrats, expectedProps);
 
 })
