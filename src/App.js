@@ -4,7 +4,7 @@ import {routes} from './Config/Routes';
 
 function App() {
   return (
-    <div className="App">
+    <div className="container">
       <Router>
           {routes.map((route) => (
             <Route
