@@ -4,7 +4,7 @@ import {routes} from './Config/Routes';
 
 function App() {
   return (
-    <div className="container">
+    <div data-test="component-app" className="container">
       <Router>
           {routes.map((route) => (
             <Route
