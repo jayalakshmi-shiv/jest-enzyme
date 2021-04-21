@@ -1,24 +1,25 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import Input from './Input';
-import {findByTestAttr, checkProps} from '../../test/testUtils';
+import {findByTestAttr, checkProps, storeFactory} from '../../test/testUtils';
 import { beforeAll } from 'jest-circus';
+import {Provider} from 'react-redux'
 
 const defaultProps = {};
 
 
-const setUp = (success = false, secretWord = "party") =>{
-    return shallow(<Input success ={success} secretWord = {secretWord}/>)
+const setUp = (initialState ={}, secretWord = "party") =>{
+    const store = storeFactory(initialState);
+    return mount(<Provider store={store}><Input secretWord = {secretWord}/></Provider>)
 }
 
 describe('render',()=>{
     describe('Success is true',()=>{
         let wrapper;
         beforeEach(()=>{
-            wrapper = setUp(true);
-        })
-        test('render without wrror',()=>{
-            let wrapper = setUp();
+            wrapper = setUp({success: true});
+        })  
+        test('input render without error',()=>{
             const component = findByTestAttr(wrapper,'component-input');
             expect(component.length).toBe(1);
         })
@@ -34,10 +35,9 @@ describe('render',()=>{
     describe('Success is false',()=>{
         let wrapper;
         beforeEach(()=>{
-            wrapper = setUp(false);
+            wrapper = setUp({success: false});
         })
-        test('render without wrror',()=>{
-            let wrapper = setUp();
+        test('input render without error',()=>{
             const component = findByTestAttr(wrapper,'component-input');
             expect(component.length).toBe(1);
         })
@@ -66,7 +66,7 @@ describe('state controlled input field',()=>{
         mockSetCurrentGuess.mockClear();
         originalUseState = React.useState;
         React.useState = jest.fn(()=>["",mockSetCurrentGuess]);
-        wrapper = setUp();
+        wrapper = setUp({success: false});
     })
     afterEach(()=>{
         React.useState = originalUseState;

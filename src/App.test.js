@@ -1,13 +1,17 @@
 import { mount } from 'enzyme'
-import {findByTestAttr, checkProps} from '../test/testUtils';
+import {findByTestAttr, checkProps, storeFactory} from '../test/testUtils';
 import App from './App';
+import {Provider} from 'react-redux'
+
 
 // activate global mock to make sure getSecteWord doesn't make network call
 jest.mock('./actions');
 import {getSecretWord as mockGetSecretWord} from './actions'
+import { ProvidePlugin } from 'webpack';
 const setUp = () =>{
+    const store = storeFactory();
     //use mount, because useEffect not called on 'shallow'
-    return mount(<App/>);
+    return mount(<Provider store={store}><App/></Provider>);
 }
 
 test('renders without error',()=>{
