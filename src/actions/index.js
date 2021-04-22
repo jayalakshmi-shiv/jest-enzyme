@@ -1,7 +1,9 @@
 import axios from  'axios';
+import { getLetterMatchCount } from '../helpers.js';
 
 export const actionType = {
-    CORRECT_GUESS : 'CORRECT_GUESS'
+    CORRECT_GUESS : 'CORRECT_GUESS',
+    GUESS_WORD: 'GUESS_WORD'
 }
 
 // export function correctGuess () {
@@ -12,7 +14,16 @@ export const actionType = {
 // thunk middle ware action creator
 export const guessWord = (guessedWord) =>{
     return function(dispatch, getState){
-        
+        const secretWord = getState().secretWord;
+        const letterMatchCount = getLetterMatchCount (guessedWord, secretWord);
+        dispatch({
+            type: actionType.GUESS_WORD,
+            payload:{guessedWord, letterMatchCount}
+        });
+
+        if(guessedWord === secretWord) {
+            dispatch({type: actionType.CORRECT_GUESS})
+        }
     }
 }
 
